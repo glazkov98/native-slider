@@ -1,0 +1,1 @@
+# Native JavaScript slider with used ES6 classes
