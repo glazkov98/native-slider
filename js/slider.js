@@ -1,5 +1,14 @@
+/** Class representing a NativeSlider. */
 class NativeSlider {
+
+	/**
+     * Create a NativeSlider instance.
+     * @param {string} selector - CSS selector.
+     * @param {(Object|boolean)} options - Object with options.
+     */
 	constructor(selector, options = false) {
+		if (!selector) return false;
+
 		this.selector = selector;
 		this.class = this.selector.slice(1);
 		this.current = 1;
@@ -28,6 +37,7 @@ class NativeSlider {
 		}
 	}
 
+	/** Initialization method. */
 	init() {
 		if (document.documentElement.clientWidth < 768) {
 			this.default.width = this.default.width - 60;
@@ -125,16 +135,19 @@ class NativeSlider {
 		}
 	}
 
+	/** Prev slide method. */
 	prev() {
 		const prevItem = this.current - 1;
 		this.scrollToItem(prevItem);
 	}
 
+	/** Next slide method. */
 	next() {
 		const nextItem = this.current + 1;
 		this.scrollToItem(nextItem);
 	}
 
+	/** Toggle CSS classes method. */
 	toggle() {
 		if (this.current < 1) this.current = this.count;
 		else if (this.current > this.count) this.current = 1;
@@ -166,6 +179,10 @@ class NativeSlider {
 		}, this.default.speed);
 	}
 
+	/**
+     * Scroll to item
+     * @param {number} item - current item number.
+     */
 	scrollToItem(item) {
 		this.current = item;
 		this.scroll = -(this.default.width * item);
@@ -173,6 +190,7 @@ class NativeSlider {
 		this.animate();
 	}
 
+	/** Animate method. */
 	animate() {
 		const sliderList = document.querySelector(`${this.selector}__list`);
 		const speed = this.default.speed;
